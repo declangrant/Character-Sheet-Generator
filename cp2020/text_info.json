@@ -1,0 +1,34 @@
+{
+    "stat_font": {
+        "file": "arial.ttf",
+        "size": 120
+    },
+    "skill_font": {
+        "file": "arial.ttf",
+        "size": 100
+    },
+    "row_height": 138,
+    "column_width": 1935,
+    "boxes": [
+        {
+            "x": 40,
+            "y": 3920,
+            "rows": 46
+        },
+        {
+            "x": 2130,
+            "y": 3920,
+            "rows": 46
+        },
+        {
+            "x": 4180,
+            "y": 3920,
+            "rows": 12
+        },
+        {
+            "x": 6270,
+            "y": 3920,
+            "rows": 6
+        }
+    ]
+}
