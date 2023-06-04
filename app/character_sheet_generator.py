@@ -7,6 +7,7 @@ import warnings
 
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
+
 class CharacterSheetGenerator:
     """
     Class to generate a Cyberpunk 2020 character sheet with selected skills.
@@ -94,10 +95,24 @@ class CharacterSheetGenerator:
             self.box_num += 1
 
 
+    def _check_box_space(self) -> bool:
+        """
+        Checks if there are still available boxes.
+        """
+
+        if self.box_num >= len(self.text_info["boxes"]):
+            warnings.warn("no more space in boxes, truncating skills")
+            return False
+        else:
+            return True
+
+
     def execute(self):
         """
         Generates the PDF file.
         """
+
+        print("executing")
 
         front_img = Image.open(self.front_img_path).convert("RGB")
         self.text_layer = ImageDraw.Draw(front_img)
@@ -111,8 +126,7 @@ class CharacterSheetGenerator:
             if not skill["enabled"]:
                 continue
             # stop if out of room
-            if self.box_num > len(self.text_info["boxes"])-1:
-                warnings.warn("no more space in boxes, truncating skills")
+            if not self._check_box_space():
                 break
             # add header if not exists
             if skill["stat"] not in done_stats:
@@ -123,11 +137,19 @@ class CharacterSheetGenerator:
             if count == 0:  # 0 is an editor flag, means 1 when generating
                 count = 1
             for i in range(count):
+                # stop if out of room
+                if i > 0:
+                    if not self._check_box_space():
+                        break
                 self._add_row(skill["skill"], True, skill["entry"])
 
+        # save pdf
         back_img = Image.open(self.back_img_path).convert("RGB")
-        os.mkdir("output")
+        if not os.path.exists("output"):
+            os.mkdir("output")
         front_img.save("output/Character Sheet.pdf", save_all=True, append_images=[back_img])
+
+        print("done")
 
 
 if __name__ == "__main__":
