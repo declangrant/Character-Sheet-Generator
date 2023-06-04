@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import ast
 import csv
 import json
+import os
 import warnings
 
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
@@ -72,7 +73,7 @@ class CharacterSheetGenerator:
 
     def execute(self):
 
-        front_img = Image.open(self.front_img_path)
+        front_img = Image.open(self.front_img_path).convert("RGB")
         self.text_layer = ImageDraw.Draw(front_img)
 
         self.box_num = 0
@@ -80,18 +81,27 @@ class CharacterSheetGenerator:
 
         done_stats = []
         for skill in self.skills:
+            # skip disabled skills
             if not skill["enabled"]:
                 continue
+            # stop if out of room
+            if self.box_num > len(self.text_info["boxes"])-1:
+                warnings.warn("no more space in boxes, truncating skills")
+                break
+            # add header if not exists
             if skill["stat"] not in done_stats:
                 self._add_row(skill["stat"], False)
                 done_stats.append(skill["stat"])
+            # add required number of skills
             count = skill["count"]
-            if count == 0:
+            if count == 0:  # 0 is an editor flag, means 1 when generating
                 count = 1
             for i in range(count):
                 self._add_row(skill["skill"], True, skill["entry"])
 
-        front_img.save("output/Character Sheet.png")
+        back_img = Image.open(self.back_img_path).convert("RGB")
+        os.mkdir("output")
+        front_img.save("output/Character Sheet.pdf", save_all=True, append_images=[back_img])
 
 
 if __name__ == "__main__":
