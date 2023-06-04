@@ -1,7 +1,7 @@
 {
     "stat_font": {
-        "file": "arial.ttf",
-        "size": 120
+        "file": "ARIALNB.TTF",
+        "size": 110
     },
     "skill_font": {
         "file": "arial.ttf",
