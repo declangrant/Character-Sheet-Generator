@@ -1,7 +1,21 @@
 from PIL import Image, ImageDraw, ImageFont
+import ast
+import csv
 import json
+import warnings
+
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 class CharacterSheetGenerator:
+
+    SKILLS_SCHEMA = {
+        "skill": str,
+        "stat": str,
+        "count": int,
+        "entry": bool,
+        "enabled": bool,
+        "source": str
+    }
 
     def __init__(self, data_dir: str):
 
@@ -11,30 +25,44 @@ class CharacterSheetGenerator:
         with open(f"{data_dir}/text_info.json", "r") as file:
             self.text_info = json.load(file)
 
-        with open(f"{data_dir}/skills.json", "r") as file:
-            self.all_skills = json.load(file)
+        with open(f"{data_dir}/skills.csv", "r") as file:
+            reader = csv.DictReader(file)
+            self.skills = []
+            for row in reader:
+                self.skills.append({k:v if self.SKILLS_SCHEMA[k]==str else ast.literal_eval(v) for k,v in row.items()})
 
         self.stat_font = ImageFont.truetype(self.text_info["stat_font"]["file"], self.text_info["stat_font"]["size"])
         self.skill_font = ImageFont.truetype(self.text_info["skill_font"]["file"], self.text_info["skill_font"]["size"])
 
-        self.entry = "[       ]"
-        self.entry_width = self.skill_font.getsize(self.entry)[0]
-        self.fill_char = "."
-        self.fill_char_width = self.skill_font.getsize(self.fill_char)[0]
+        self.fill_symbol = "[       ]"
+        self.fill_width = self.skill_font.getsize(self.fill_symbol)[0]
+        self.dot_char_width = self.skill_font.getsize(".")[0]
+        self.entry_char_width = self.skill_font.getsize("_")[0]
 
 
-    def _add_row(self, text: str, skill: bool):
+    def _add_row(self, text: str, skill: bool, entry: bool = False):
 
-        x = self.text_info["boxes"][self.box_num]["x"]
+        if "override_width" in self.text_info["boxes"][self.box_num]:
+            col_width = self.text_info["boxes"][self.box_num]["override_width"]
+        else:
+            col_width = self.text_info["column_width"]
+
+        x_text = self.text_info["boxes"][self.box_num]["x"]
         y = self.text_info["boxes"][self.box_num]["y"]+self.row_num*self.text_info["row_height"]
-        self.text_layer.text((x,y), text, "black", font=self.skill_font if skill else self.stat_font)
 
         if skill:
-            width = self.skill_font.getsize(text)[0] + self.entry_width
-            fill = self.fill_char * ((self.text_info["column_width"]-width) // self.fill_char_width - 1) + self.entry
-            x += self.text_info["column_width"] - self.skill_font.getsize(fill)[0]
-            self.text_layer.text((x,y), fill, "black", font=self.skill_font if skill else self.stat_font)
-        
+            width = self.skill_font.getsize(text)[0] + self.fill_width
+            if entry:
+                text += "_" * ((col_width-width) // self.entry_char_width + 1)
+                end = self.fill_symbol
+            else:
+                end = "." * ((col_width-width) // self.dot_char_width - 1) + self.fill_symbol
+            x_end = x_text + col_width - self.skill_font.getsize(end)[0]
+
+            self.text_layer.text((x_end,y), end, "black", font=self.skill_font if skill else self.stat_font)
+
+        self.text_layer.text((x_text,y), text, "black", font=self.skill_font if skill else self.stat_font)
+
         if self.row_num < self.text_info["boxes"][self.box_num]["rows"]-1:
             self.row_num += 1
         else:
@@ -50,10 +78,18 @@ class CharacterSheetGenerator:
         self.box_num = 0
         self.row_num = 0
 
-        for stat,skills in self.all_skills.items():
-            self._add_row(stat, False)
-            for skill in skills:
-                self._add_row(skill, True)
+        done_stats = []
+        for skill in self.skills:
+            if not skill["enabled"]:
+                continue
+            if skill["stat"] not in done_stats:
+                self._add_row(skill["stat"], False)
+                done_stats.append(skill["stat"])
+            count = skill["count"]
+            if count == 0:
+                count = 1
+            for i in range(count):
+                self._add_row(skill["skill"], True, skill["entry"])
 
         front_img.save("output/Character Sheet.png")
 
