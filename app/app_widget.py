@@ -1,20 +1,27 @@
 import sys
 from PyQt5 import QtWidgets
 
-from qt_helpers import VerticalTabWidget
-from tab_widget import TabWidget
-from character_sheet_generator import CharacterSheetGenerator
+from app.qt_helpers import VerticalTabWidget
+from app.tab_widget import TabWidget
+from app.character_sheet_generator import CharacterSheetGenerator
 
 
 class AppWidget(QtWidgets.QWidget):
+    """
+    Main character sheet GUI class.
+    """
 
     def __init__(self):
+        """
+        Initiates a new AppWidget.
+        """
 
         super().__init__()
         self.setWindowTitle("Character Sheet Generator")
 
         self.generator = CharacterSheetGenerator()
 
+        # build tab selection for each stat/header
         self.tabs = VerticalTabWidget()
         self.tab_widgets = []
         done_stats = []
@@ -33,20 +40,14 @@ class AppWidget(QtWidgets.QWidget):
         self.setLayout(layout)
     
 
-    def generate(self):
+    def generate(self) -> None:
+        """
+        Executes the generator with current skills.
+        """
 
+        # update skill info
         for tab in self.tab_widgets:
             for skill in tab.widgets:
                 skill.update_skill()
         
         self.generator.execute()
-
-
-if __name__ == "__main__":
-
-    app = QtWidgets.QApplication([])
-
-    widget = AppWidget()
-    widget.show()
-
-    sys.exit(app.exec_())

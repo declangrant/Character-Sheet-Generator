@@ -2,8 +2,17 @@ from PyQt5 import QtWidgets
 
 
 class SkillWidget(QtWidgets.QWidget):
+    """
+    Class to display a single skill with controls.
+    """
 
-    def __init__(self, skill):
+    def __init__(self, skill: dict):
+        """
+        Initiates a new SkillWidget.
+
+        Args:
+            skill: dictionary of skill data
+        """
 
         super().__init__()
 
@@ -11,19 +20,22 @@ class SkillWidget(QtWidgets.QWidget):
 
         layout = QtWidgets.QHBoxLayout()
 
+        # make checkbox for [enabled] attribute
         self.check = QtWidgets.QCheckBox("")
         self.check.setChecked(self.skill["enabled"])
         layout.addWidget(self.check)
 
-        if self.skill["count"] == 0:
+        # add counter if allowed
+        if self.skill["count"] == 0:    # [count] 0 means only one allowed
             self.count = None
             layout.addWidget(QtWidgets.QLabel(""))
-        else:
+        else:       # otherwise add input widget
             self.count = QtWidgets.QSpinBox()
             self.count.setValue(self.skill["count"])
             self.count.setRange(1,20)
             layout.addWidget(self.count)
 
+        # display skill name and source
         if self.skill["skill"] == "":
             layout.addWidget(QtWidgets.QLabel("<blank>"))
         else:
@@ -33,7 +45,10 @@ class SkillWidget(QtWidgets.QWidget):
         self.setLayout(layout)
 
     
-    def update_skill(self):
+    def update_skill(self) -> None:
+        """
+        Update the skill dictionary with current data.
+        """
 
         self.skill["enabled"] = self.check.isChecked()
         if self.count != None:
