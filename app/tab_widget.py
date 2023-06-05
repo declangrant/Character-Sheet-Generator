@@ -8,13 +8,14 @@ class TabWidget(QtWidgets.QWidget):
     Class to display skills list as content of a tab.
     """
 
-    def __init__(self, skills: list, stat: str):
+    def __init__(self, skills: list, stat: str, parent_update):
         """
         Initiates a new TabWidget
 
         Args:
             skills: list of dictionaries of all skill data
             stat: the category of skills this widget holds
+            parent_update: function reference to pass to SkillWidget to be called on update
         """
 
         super().__init__()
@@ -24,7 +25,7 @@ class TabWidget(QtWidgets.QWidget):
         # filter skills to this stat/header
         for skill in skills:
             if skill["stat"] == stat:
-                self.widgets.append(SkillWidget(skill))
+                self.widgets.append(SkillWidget(skill, parent_update))
         
         # place widgets in three columns
         layout = QtWidgets.QGridLayout()

@@ -1,4 +1,4 @@
-import sys
+import os
 from PyQt5 import QtWidgets
 
 from app.qt_helpers import VerticalTabWidget
@@ -27,17 +27,48 @@ class AppWidget(QtWidgets.QWidget):
         done_stats = []
         for skill in self.generator.skills:
             if skill["stat"] not in done_stats:
-                self.tab_widgets.append(TabWidget(self.generator.skills, skill["stat"]))
+                self.tab_widgets.append(TabWidget(self.generator.skills, skill["stat"], self.update_count))
                 self.tabs.addTab(self.tab_widgets[-1], skill["stat"])
                 done_stats.append(skill["stat"])
         
+        # get maximum space to place skills in the output
+        self.max_skills = 0
+        for box in self.generator.text_info["boxes"]:
+            self.max_skills += box["rows"]      # add space in each box
+        self.max_skills -= len(done_stats)      # remove spaces taken by stats/headers
+        self.count_label = QtWidgets.QLabel("")
+        self.update_count()
+
         self.generate_button = QtWidgets.QPushButton("Generate")
         self.generate_button.clicked.connect(self.generate)
         
-        layout = QtWidgets.QVBoxLayout()
-        layout.addWidget(self.tabs)
-        layout.addWidget(self.generate_button)
-        self.setLayout(layout)
+        bottom_layout = QtWidgets.QHBoxLayout()
+        bottom_layout.addWidget(self.count_label)
+        bottom_layout.addWidget(self.generate_button)
+        main_layout = QtWidgets.QVBoxLayout()
+        main_layout.addWidget(self.tabs)
+        main_layout.addLayout(bottom_layout)
+        self.setLayout(main_layout)
+    
+
+    def update_count(self) -> None:
+        """
+        Updates the active skill count display.
+        """
+        
+        # get current count
+        count = 0
+        for tab in self.tab_widgets:
+            for skill in tab.widgets:
+                count += skill.get_count()
+        
+        # update widget
+        if count > self.max_skills:
+            colour = "red"
+        else:
+            colour = "black"
+        self.count_label.setText(f"{count}/{self.max_skills} skills selected")
+        self.count_label.setStyleSheet(f"QLabel {{ color: {colour} }}")
     
 
     def generate(self) -> None:
@@ -51,3 +82,5 @@ class AppWidget(QtWidgets.QWidget):
                 skill.update_skill()
         
         self.generator.execute()
+
+        os.startfile(os.path.abspath("output"))
