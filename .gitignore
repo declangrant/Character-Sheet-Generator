@@ -1,1 +1,6 @@
+# python compiled files
+__pycache__/
+*.pyc
+
+# app output dir
 output/
