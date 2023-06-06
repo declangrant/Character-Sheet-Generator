@@ -54,4 +54,6 @@ Future features that I want to implement, in no particular order.
 - Test Linux compatibility (it should work)
 - Build as a standalone Windows application
 
-<img style="float: right;" src="https://i0.wp.com/rtalsoriangames.com/wp-content/uploads/2019/06/justcyberpunklogo.png" width=20%>
+<p align="right">
+  <img src="https://i0.wp.com/rtalsoriangames.com/wp-content/uploads/2019/06/justcyberpunklogo.png" width="15%"/>
+</p>
