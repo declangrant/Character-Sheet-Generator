@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import QtWidgets
 
-from app.app_widget import AppWidget
+from charactersheetgen.app_widget import AppWidget
 
 
 if __name__ == "__main__":

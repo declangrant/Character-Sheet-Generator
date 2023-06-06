@@ -1,9 +1,9 @@
 import os
 from PyQt5 import QtWidgets
 
-from app.qt_helpers import VerticalTabWidget
-from app.tab_widget import TabWidget
-from app.character_sheet_generator import CharacterSheetGenerator
+from charactersheetgen.qt_helpers import VerticalTabWidget
+from charactersheetgen.tab_widget import TabWidget
+from charactersheetgen.character_sheet_generator import CharacterSheetGenerator
 
 
 class AppWidget(QtWidgets.QWidget):
