@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 
-from app.skill_widget import SkillWidget
+from charactersheetgen.skill_widget import SkillWidget
 
 
 class TabWidget(QtWidgets.QWidget):
