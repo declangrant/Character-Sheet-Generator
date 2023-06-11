@@ -141,6 +141,8 @@ Martial Art,REF,3,True,CP3002,True
 Melee,REF,0,False,CP3002,True
 Motorcycle,REF,0,False,CP3002,True
 Operate Hvy.Machinery,REF,0,False,CP3002,True
+Pilot (Blimp),REF,0,False,Ilsk,False
+Pilot (Boat),REF,0,False,Hate&Glory,False
 Pilot (Deep Dive Suit),REF,0,False,CP3481,False
 Pilot (Dirigible),REF,0,False,CP3002,True
 Pilot (EVPA),REF,0,False,CP3481,False
@@ -150,6 +152,7 @@ Pilot (Hardshell),REF,0,False,CP3481,False
 Pilot (OTV),REF,0,False,CP3211,False
 Pilot (PA),REF,0,False,CP3191,False
 Pilot (Space Plane/Shuttle),REF,0,False,CP3211,False
+Pilot (Spacecraft),REF,0,False,UC-Mars,False
 Pilot (Sub),REF,0,False,CP3481,False
 Pilot (Vect.Thrust),REF,0,False,CP3002,True
 Pilot,REF,1,True,Generator,False
@@ -165,10 +168,12 @@ Zero-G Combat,REF,0,False,CP3211,False
 Zero-G Maneuver,REF,0,False,CP3211,False
 Other,REF,1,True,Generator,False
 ,REF,1,True,Generator,False
-AV Tech,TECH,0,False,CP3002,True
 Aero Tech,TECH,0,False,CP3002,True
+AV Tech,TECH,0,False,CP3002,True
+Analog Computer,TECH,0,False,Ilsk,False
 Basic Tech,TECH,0,False,CP3002,True
 BioTech,TECH,0,False,CP3901,False
+Butchery,TECH,0,False,Hate&Glory,False
 Braindance Editing,TECH,0,False,CP3271,False
 Calligraphy,TECH,0,False,CP3311,False
 Cryotank Operation,TECH,0,False,CP3002,True
@@ -182,7 +187,9 @@ Electronics,TECH,0,False,CP3002,True
 First Aid,TECH,0,False,CP3002,True
 Forgery,TECH,0,False,CP3002,True
 Gyro Tech,TECH,0,False,CP3002,True
+High-Energy Tech,TECH,0,False,UC-Mars,False
 Marine Tech/Underwater Equip,TECH,0,False,ICP120,False
+Mixology,TECH,0,False,Hate&Glory,False
 Origami,TECH,0,False,CP3311,False
 PA Tech,TECH,0,False,CP3191,False
 Paint or Draw,TECH,0,False,CP3002,True
