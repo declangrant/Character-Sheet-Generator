@@ -1,9 +1,9 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from charactersheetgen.skill_widget import SkillWidget
 
 
-class TabWidget(QtWidgets.QWidget):
+class TabWidget(QtWidgets.QScrollArea):
     """
     Class to display skills list as content of a tab.
     """
@@ -38,4 +38,19 @@ class TabWidget(QtWidgets.QWidget):
             else:
                 row = 0
                 col += 1
-        self.setLayout(layout)
+
+        # setup box for scrolling
+        group_box = QtWidgets.QGroupBox()
+        group_box.setLayout(layout)
+        self.setWidget(group_box)
+        self.setWidgetResizable(True)
+        self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.setMinimumWidth(group_box.sizeHint().width())
+        self.set_height()
+    
+
+    def set_height(self):
+        """
+        Sets the height of the widget to 2/3 of the screen height.
+        """
+        self.setFixedHeight(int(self.screen().size().height()/1.5))
