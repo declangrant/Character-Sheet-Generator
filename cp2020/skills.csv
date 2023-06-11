@@ -181,6 +181,7 @@ CyberTech,TECH,0,False,CP3002,True
 Cyberdeck Design,TECH,0,False,CP3002,True
 Demolitions,TECH,0,False,CP3002,True
 Disguise,TECH,0,False,CP3002,True
+Drone Control,TECH,0,False,Livewire,False
 Elect. Security,TECH,0,False,CP3002,True
 Elect. Warfare,TECH,0,False,CP3481,False
 Electronics,TECH,0,False,CP3002,True
@@ -190,6 +191,7 @@ Gyro Tech,TECH,0,False,CP3002,True
 High-Energy Tech,TECH,0,False,UC-Mars,False
 Marine Tech/Underwater Equip,TECH,0,False,ICP120,False
 Mixology,TECH,0,False,Hate&Glory,False
+Net Weapons,TECH,0,False,Livewire,False
 Origami,TECH,0,False,CP3311,False
 PA Tech,TECH,0,False,CP3191,False
 Paint or Draw,TECH,0,False,CP3002,True
