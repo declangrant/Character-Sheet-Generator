@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 
 class SkillWidget(QtWidgets.QWidget):
@@ -17,24 +17,31 @@ class SkillWidget(QtWidgets.QWidget):
 
         super().__init__()
 
+        self.event
         self.skill = skill
 
         layout = QtWidgets.QHBoxLayout()
 
         # make checkbox for [enabled] attribute
-        self.check = QtWidgets.QCheckBox("")
+        self.check = QtWidgets.QCheckBox(None)
         self.check.setChecked(self.skill["enabled"])
+        self.check.setMaximumWidth(int(self.check.minimumSizeHint().width()))
         self.check.stateChanged.connect(parent_update)
         layout.addWidget(self.check)
+        
+        # get size of spinbox
+        self.count = QtWidgets.QSpinBox()
+        self.count.setValue(self.skill["count"])
+        self.count.setRange(1,20)
+        countWidth = int(self.count.minimumSizeHint().width()/1.3)
 
-        # add counter if allowed
+        # replace spinbox with spacer
         if self.skill["count"] == 0:    # [count] 0 means only one allowed
             self.count = None
-            layout.addWidget(QtWidgets.QLabel(""))
-        else:       # otherwise add input widget
-            self.count = QtWidgets.QSpinBox()
-            self.count.setValue(self.skill["count"])
-            self.count.setRange(1,20)
+            layout.addSpacerItem(QtWidgets.QSpacerItem(countWidth, 0))
+        # or display spinbox
+        else:
+            self.count.setMaximumWidth(countWidth)
             self.count.valueChanged.connect(parent_update)
             layout.addWidget(self.count)
 
@@ -43,7 +50,12 @@ class SkillWidget(QtWidgets.QWidget):
             layout.addWidget(QtWidgets.QLabel("<blank>"))
         else:
             layout.addWidget(QtWidgets.QLabel(self.skill["skill"]))
-        layout.addWidget(QtWidgets.QLabel(f"[{self.skill['source']}]"))
+        
+        source_label = QtWidgets.QLabel(f"[{self.skill['source']}]")
+        source_label.setAlignment(QtCore.Qt.AlignRight)
+        source_label.setAlignment(QtCore.Qt.AlignVCenter)
+        source_label.setMaximumWidth(source_label.sizeHint().width())
+        layout.addWidget(source_label)
 
         self.setLayout(layout)
 

@@ -1,73 +1,139 @@
 skill,stat,count,entry,source,enabled
+Administrator Resources,SPECIAL ABILITIES,0,False,CP3601,False
+Aircraft Sense,SPECIAL ABILITIES,0,False,RT03491,False
 Authority,SPECIAL ABILITIES,0,False,CP3002,True
+Barter,SPECIAL ABILITIES,0,False,ICP120,False
+Brotherhood,SPECIAL ABILITIES,0,False,CP3211,False
+Chameleon,SPECIAL ABILITIES,0,False,CP3601,False
 Charismatic Leadership,SPECIAL ABILITIES,0,False,CP3002,True
 Combat Sense,SPECIAL ABILITIES,0,False,CP3002,True
+Combat Sense,SPECIAL ABILITIES,0,False,CP3221,False
+Con,SPECIAL ABILITIES,0,False,CP3271,False
+Counsel,SPECIAL ABILITIES,0,False,CP3371,False
 Credibility,SPECIAL ABILITIES,0,False,CP3002,True
 Family,SPECIAL ABILITIES,0,False,CP3002,True
+Family,SPECIAL ABILITIES,0,False,CP3211,False
+Gang Rank,SPECIAL ABILITIES,0,False,CP3271,False
 Interface,SPECIAL ABILITIES,0,False,CP3002,True
 Jury Rig,SPECIAL ABILITIES,0,False,CP3002,True
+Kith,SPECIAL ABILITIES,0,False,CP3371,False
 Medical Tech,SPECIAL ABILITIES,0,False,CP3002,True
+PA Combat Sense,SPECIAL ABILITIES,0,False,CP3191,False
+Reason,SPECIAL ABILITIES,0,False,CP3171,False
+Recognition,SPECIAL ABILITIES,0,False,ICP120,False
+Reconnaissance,SPECIAL ABILITIES,0,False,CP3371,False
+Research,SPECIAL ABILITIES,0,False,CP3601,False
 Resources,SPECIAL ABILITIES,0,False,CP3002,True
+Salvage,SPECIAL ABILITIES,0,False,CP3211,False
+Scrounge,SPECIAL ABILITIES,0,False,CP3271,False
+Sneak,SPECIAL ABILITIES,0,False,CP3271,False
+Space Combat,SPECIAL ABILITIES,0,False,CP3211,False
+Spy Craft,SPECIAL ABILITIES,0,False,ICP116,False
 Streetdeal,SPECIAL ABILITIES,0,False,CP3002,True
-Other,SPECIAL ABILITIES,1,True,custom,False
+Trace,SPECIAL ABILITIES,0,False,ICP116,False
+Urban Survival,SPECIAL ABILITIES,0,False,CP3601,False
+Vamp,SPECIAL ABILITIES,0,False,CP3271,False
+Vehicle Zen,SPECIAL ABILITIES,0,False,CP3371,False
+Warpath,SPECIAL ABILITIES,0,False,CP3371,False
+Workgang,SPECIAL ABILITIES,0,False,CP3211,False
+Other,SPECIAL ABILITIES,1,True,Generator,False
+,SPECIAL ABILITIES,1,True,Generator,False
 Personal Grooming,ATTR,0,False,CP3002,True
 Wardrobe & Style,ATTR,0,False,CP3002,True
-Other,ATTR,1,True,custom,False
+Other,ATTR,1,True,Generator,False
+,ATTR,1,True,Generator,False
+Controlled Hyperventilation,BODY,0,False,ICP120,False
 Endurance,BODY,0,False,CP3002,True
 Strength Feat,BODY,0,False,CP3002,True
 Swimming,BODY,0,False,CP3002,True
-Other,BODY,1,True,custom,False
+Other,BODY,1,True,Generator,False
+,BODY,1,True,Generator,False
 Interrogation,COOL/WILL,0,False,CP3002,True
 Intimidate,COOL/WILL,0,False,CP3002,True
+Meditation,COOL/WILL,0,False,ICP101,False
 Oratory,COOL/WILL,0,False,CP3002,True
 Resist Torture/Drugs,COOL/WILL,0,False,CP3002,True
+Rhetoric,COOL/WILL,0,False,CP3311,False
 Streetwise,COOL/WILL,0,False,CP3002,True
-Other,COOL/WILL,1,True,custom,False
+Other,COOL/WILL,1,True,Generator,False
+,COOL/WILL,1,True,Generator,False
+Animal Handling,EMPATHY,0,False,ICP101,False
 Human Perception,EMPATHY,0,False,CP3002,True
 Interview,EMPATHY,0,False,CP3002,True
 Leadership,EMPATHY,0,False,CP3002,True
-Seduction,EMPATHY,0,False,CP3002,True
-Social,EMPATHY,0,False,CP3002,True
-Persuasion & Fast Talk,EMPATHY,0,False,CP3002,True
+Palmistry,EMPATHY,0,False,ICP110,False
 Perform,EMPATHY,0,False,CP3002,True
-Other,EMPATHY,1,True,custom,False
+Persuasion & Fast Talk,EMPATHY,0,False,CP3002,True
+Seduction,EMPATHY,0,False,CP3002,True
+Simper,EMPATHY,0,False,CP3601,False
+Social,EMPATHY,0,False,CP3002,True
+Trance,EMPATHY,0,False,CP3311,False
+Other,EMPATHY,1,True,Generator,False
+,EMPATHY,1,True,Generator,False
 Accounting,INT,0,False,CP3002,True
 Anthropology,INT,0,False,CP3002,True
+Area Knowledge,INT,1,True,CP3601,False
 Astrogation,INT,0,False,CP3211,False
+Astrology,INT,0,False,ICP110,False
 Awareness/Notice,INT,0,False,CP3002,True
+Biogenetics,INT,0,False,CP3481,False
 Biology,INT,0,False,CP3002,True
+Body Language,INT,0,False,ICP101,False
 Botany,INT,0,False,CP3002,True
+Braindance Use,INT,0,False,CP3211,False
 Bureaucracy,INT,0,False,CP3601,False
+Business Sense,INT,0,False,CP3101,False
 Chemistry,INT,0,False,CP3002,True
 Composition,INT,0,False,CP3002,True
+Corporate Policy,INT,0,False,CP3101,False
+Culture,INT,0,False,CP3271,False
 Diagnose Illness,INT,0,False,CP3002,True
 Education & Gen.Know,INT,0,False,CP3002,True
+Eidetic Memory,INT,0,False,ICP101,False
 Expert,INT,1,True,CP3002,True
 Gamble,INT,0,False,CP3002,True
 Geology,INT,0,False,CP3002,True
+Graphology,INT,0,False,ICP110,False
+Herbalism,INT,0,False,ICP110,False
 Hide/Evade,INT,0,False,CP3002,True
 History,INT,0,False,CP3002,True
-Lanuage,INT,3,True,CP3002,True
+Language,INT,3,True,CP3002,True
 Library Search,INT,0,False,CP3002,True
+Magic (Stage Magic),INT,0,False,ICP110,False
 Mathematics,INT,0,False,CP3002,True
+Nuscuba,INT,0,False,CP3481,False
 Physics,INT,0,False,CP3002,True
+Pilot (Ship),INT,0,False,CP3221,False
 Programming,INT,0,False,CP3002,True
+Psychology,INT,0,False,CP3271,False
+Rune Lore,INT,0,False,ICP110,False
+Sailpower,INT,0,False,CP3201,False
+Seamanship,INT,0,False,CP3201,False
 Shadow/Track,INT,0,False,CP3002,True
 Space Survival,INT,0,False,CP3211,False
 Stock Market,INT,0,False,CP3002,True
+Street Survival,INT,0,False,CP3311,False
+Survival,INT,1,True,CP3201,False
 System Knowledge,INT,0,False,CP3002,True
 Tactics,INT,0,False,CP3601,False
 Teaching,INT,0,False,CP3002,True
+Theology,INT,0,False,ICP110,False
+Underwater Survival,INT,0,False,CP3481,False
+Urban Survival,INT,0,False,CP3601,False
+Vampire Lore,INT,0,False,ICP101,False
+Water Vehicles,INT,0,False,CP3901,False
 Wilderness Survival,INT,0,False,CP3002,True
 Zoology,INT,0,False,CP3002,True
-Other,INT,1,True,custom,False
-,INT,1,True,custom,False
+Other,INT,1,True,Generator,False
+,INT,1,True,Generator,False
+Action Game,REF,0,False,CP3311,False
 Archery,REF,0,False,CP3002,True
 Athletics,REF,0,False,CP3002,True
 Brawling,REF,0,False,CP3002,True
 Dance,REF,0,False,CP3002,True
 Dodge & Escape,REF,0,False,CP3002,True
 Driving,REF,0,False,CP3002,True
+EVA,REF,0,False,CP3211,False
 Fencing,REF,0,False,CP3002,True
 Handgun,REF,0,False,CP3002,True
 Heavy Weapons,REF,0,False,CP3002,True
@@ -75,32 +141,69 @@ Martial Art,REF,3,True,CP3002,True
 Melee,REF,0,False,CP3002,True
 Motorcycle,REF,0,False,CP3002,True
 Operate Hvy.Machinery,REF,0,False,CP3002,True
-Pilot (Gyro),REF,0,False,CP3002,True
-Pilot (Fixed Wing),REF,0,False,CP3002,True
+Pilot (Blimp),REF,0,False,Ilsk,False
+Pilot (Boat),REF,0,False,Hate&Glory,False
+Pilot (Deep Dive Suit),REF,0,False,CP3481,False
 Pilot (Dirigible),REF,0,False,CP3002,True
-Pilot (Vect.Thrust Vehicle),REF,0,False,CP3002,True
+Pilot (EVPA),REF,0,False,CP3481,False
+Pilot (Fixed Wing),REF,0,False,CP3002,True
+Pilot (Gyro),REF,0,False,CP3002,True
+Pilot (Hardshell),REF,0,False,CP3481,False
+Pilot (OTV),REF,0,False,CP3211,False
+Pilot (PA),REF,0,False,CP3191,False
+Pilot (Space Plane/Shuttle),REF,0,False,CP3211,False
+Pilot (Spacecraft),REF,0,False,UC-Mars,False
+Pilot (Sub),REF,0,False,CP3481,False
+Pilot (Vect.Thrust),REF,0,False,CP3002,True
+Pilot,REF,1,True,Generator,False
 Rifle,REF,0,False,CP3002,True
+Sleight of Hand,REF,0,False,ICP110,False
 Stealth,REF,0,False,CP3002,True
 Submachinegun,REF,0,False,CP3002,True
-Other,REF,1,True,custom,False
+Underwater Combat,REF,0,False,CP3481,False
+Underwater Heavy Weapons,REF,0,False,CP3481,False
+Underwater Weapons,REF,0,False,CP3481,False
+Water Vehicles,REF,0,False,CP3901,False
+Zero-G Combat,REF,0,False,CP3211,False
+Zero-G Maneuver,REF,0,False,CP3211,False
+Other,REF,1,True,Generator,False
+,REF,1,True,Generator,False
 Aero Tech,TECH,0,False,CP3002,True
 AV Tech,TECH,0,False,CP3002,True
+Analog Computer,TECH,0,False,Ilsk,False
 Basic Tech,TECH,0,False,CP3002,True
+BioTech,TECH,0,False,CP3901,False
+Butchery,TECH,0,False,Hate&Glory,False
+Braindance Editing,TECH,0,False,CP3271,False
+Calligraphy,TECH,0,False,CP3311,False
 Cryotank Operation,TECH,0,False,CP3002,True
-Cyberdeck Design,TECH,0,False,CP3002,True
 CyberTech,TECH,0,False,CP3002,True
+Cyberdeck Design,TECH,0,False,CP3002,True
 Demolitions,TECH,0,False,CP3002,True
 Disguise,TECH,0,False,CP3002,True
-Electronics,TECH,0,False,CP3002,True
 Elect. Security,TECH,0,False,CP3002,True
+Elect. Warfare,TECH,0,False,CP3481,False
+Electronics,TECH,0,False,CP3002,True
 First Aid,TECH,0,False,CP3002,True
 Forgery,TECH,0,False,CP3002,True
 Gyro Tech,TECH,0,False,CP3002,True
+High-Energy Tech,TECH,0,False,UC-Mars,False
+Marine Tech/Underwater Equip,TECH,0,False,ICP120,False
+Mixology,TECH,0,False,Hate&Glory,False
+Origami,TECH,0,False,CP3311,False
+PA Tech,TECH,0,False,CP3191,False
 Paint or Draw,TECH,0,False,CP3002,True
-Photo & Film,TECH,0,False,CP3002,True
 Pharmaceuticals,TECH,0,False,CP3002,True
+Photo & Film,TECH,0,False,CP3002,True
 Pick Lock,TECH,0,False,CP3002,True
 Pick Pocket,TECH,0,False,CP3002,True
 Play Instrument,TECH,0,False,CP3002,True
+Pressure Suit Tech,TECH,0,False,CP3481,False
+Sonar Tech,TECH,0,False,CP3481,False
+Sub Tech,TECH,0,False,CP3481,False
+Tattooing,TECH,0,False,CP3311,False
+Video Manipulation,TECH,0,False,ICP116,False
 Weaponsmith,TECH,0,False,CP3002,True
+Wetware Design,TECH,0,False,CP3271,False
 Other,TECH,6,True,CP3002,True
+,TECH,1,True,Generator,False

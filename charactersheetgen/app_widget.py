@@ -1,5 +1,5 @@
 import os
-from PyQt5 import QtWidgets
+from PyQt5 import QtGui, QtWidgets
 
 from charactersheetgen.qt_helpers import VerticalTabWidget
 from charactersheetgen.tab_widget import TabWidget
@@ -49,6 +49,15 @@ class AppWidget(QtWidgets.QWidget):
         main_layout.addWidget(self.tabs)
         main_layout.addLayout(bottom_layout)
         self.setLayout(main_layout)
+    
+
+    def event(self, _event) -> bool:
+        # shrink the window on move to handle dragging across monitors
+        if isinstance(_event, QtGui.QMoveEvent):
+            for widget in self.tab_widgets:
+                widget.set_height()
+            self.resize(self.minimumSizeHint())
+        return super().event(_event)
     
 
     def update_count(self) -> None:
