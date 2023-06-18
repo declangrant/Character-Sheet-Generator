@@ -13,20 +13,20 @@ The `main` branch should always be in a stable state, and development branches s
   Any branch intended for new development.
   Feature branches are the most general type, so use this if you are unsure what to name your branch.
   
-  i.e., `feature/add_profile_selector`, `feature/update_deployment_script`
+  eg. `feature/add_profile_selector`, `feature/update_deployment_script`
 
 - `hotfix/*`
 
   A branch for small, quick fixes that were discovered after a feature branch was merged.
   If the fix will require significant changes, it should be a feature branch.
   
-  i.e., `hotfix/window_title_typo`, `hotfix/skill_counter`
+  eg. `hotfix/window_title_typo`, `hotfix/skill_counter`
 
 - `content/*`
 
   A branch that will only change markdown or Cyberpunk configuration files.
   
-  i.e., `content/install_instructions`, `content/cp_2013_skills`
+  eg. `content/install_instructions`, `content/cp_2013_skills`
 
 ## Pull Requests
 
