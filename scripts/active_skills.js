@@ -1,12 +1,20 @@
-var active_skills = new Object();
+class Tab {
+    constructor(tab_name) {
+        this._tab_name = tab_name;
+        this._active_skills = new Object();
+    }
 
+    get tab_name(){
+        return this._tab_name;
+    }
 
-function getActiveSkills(){
-    return active_skills;
-}
-
-function updateSkillCount(skill){
-    active_skills[skill.stat][skill.skill_name] = skill;
+    getActiveSkills(){
+        return active_skills;
+    }
+    
+    setSkill(id, skill){
+        active_skills[id] = skill;
+    }
 }
 
 class Skill {
