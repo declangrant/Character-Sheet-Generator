@@ -7,7 +7,7 @@ async function parseCSV(path){
     return split_text;
 }
 
-async function parseCSVInput(e){
+function parseCSVInput(e){
     var contents = e.target.result;
     return contents.split("\n");
 }
