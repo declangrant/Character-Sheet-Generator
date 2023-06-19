@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>CYBERPUNK Character Sheet Generator</title>
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="scripts/UIGenerator.js"></script>
+        <script src="scripts/active_skills.js"></script>
+        <script src="scripts/PDFGenerator.js"></script>
+        <script src="https://unpkg.com/pdf-lib"></script>
+        <script src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.js"></script>
+        <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data" id="file_upload_form">
+            <input type="file" id="file" name="file">
+        </form>
+    </body>
+</html>
