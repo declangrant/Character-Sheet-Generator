@@ -1,14 +1,15 @@
 window.onload = setupUI;
 
+const tabs = Object();
+
 async function setupUI(){
-    await setupSkills().then((tabs) => {
+    await returnTabs().then((tabs) => {
         var tabDiv = document.createElement("div");
         tabDiv.className = "tab_div";
         document.body.appendChild(tabDiv);
 
         Object.keys(tabs).forEach(async tabString => {
             var tab = tabs[tabString];
-
 
             let skills = await tab.getSkills();
             skills.forEach(skillObject => {
@@ -47,9 +48,10 @@ async function setupUI(){
                 checkbox.id = skill_name + "_checkbox"
                 checkbox.type = "checkbox";
                 checkbox.className = "should_enable";
-                checkbox.checked = skillObject.enabled.toLowerCase() === "true";
+                checkbox.checked = skillObject.enabled;
                 checkbox.addEventListener('change', (event) => {
                     skillObject.enabled = event.currentTarget.checked;
+                    tabStorage[skillObject.stat] = skillObject;
                 })
 
                 td.append(checkbox);

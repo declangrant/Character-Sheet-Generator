@@ -1,26 +1,34 @@
-const tabs = Object();
+var tabStorage = Object();
 
-async function setupSkills(){
-    this.tabs = parseCSV("./cp2020/skills.csv").then((lines) => {
-        const tempTabs = Object();
+async function returnTabs(){
+    if(Object.keys(this.tabStorage).length > 0){
+        return this.tabStorage;
+    } else {
+        return await setupSkills("./cp2020/skills.csv");
+    }
+}
+
+async function setupSkills(url){
+    this.tabStorage = parseCSV(url).then((lines) => {
+        const temptabStorage = Object();
         for(var i = 1; i < lines.length; i++){
             let skillRow = lines[i].replace(/(\r\n|\n|\r)/gm, "").split(",");
             let skill = new Skill(skillRow);
-            let tab = tempTabs[skill.stat]
+            let tab = temptabStorage[skill.stat]
             if(tab == null){
                 tab = new Tab(skill.stat);
-                tempTabs[skill.stat] = tab;
+                temptabStorage[skill.stat] = tab;
             }
             tab.addSkill(skill);
         }
-        Object.keys(tempTabs).forEach(tab => {
-            tempTabs[tab].sort();
+        Object.keys(temptabStorage).forEach(tab => {
+            temptabStorage[tab].sort();
         });
 
-        return tempTabs;
+        return temptabStorage;
     });
 
-    return this.tabs;
+    return this.tabStorage;
 }
 
 
@@ -71,19 +79,19 @@ class Skill {
         if(typeof(skill_name) == String){
             this._skill_name = skill_name;
             this._stat = stat;
-            this._has_entry = has_entry;
+            this._has_entry = has_entry.toUpperCase() == "TRUE";
             this._source = source;
-            this._enabled = enabled;
+            this._enabled = enabled.toUpperCase() == "TRUE";
             this._count = parseInt(default_count);
         }else{
             let array = skill_name;
 
             this._skill_name = array[0];
             this._stat = array[1].toUpperCase();
-            this._has_entry = array[3];
+            this._has_entry = array[3].toUpperCase() == "TRUE";
             this._source = array[4];
-            this._enabled = array[5];
-            this._count = parseInt(array[4]);
+            this._enabled = array[5].toUpperCase() == "TRUE";
+            this._count = parseInt(array[2]);
         }
     }
 
