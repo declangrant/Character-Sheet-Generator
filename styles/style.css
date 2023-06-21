@@ -30,13 +30,37 @@
     animation: fadeEffect 1s;
 }
 
-table {
-    border-collapse: collapse;
+.tabGrid {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
+    grid-template-rows: repeat(auto-fill, 60px);
+    grid-auto-flow: row;
 }
 
-tr {
-    border-right: 1px solid #ccc;
+.skillDiv {
+    line-height: 60px;
+    display: inline-block;
     height: 60px;
+}
+.skillDiv > * {
+    vertical-align: middle;
+}
+.container {
+    padding: 0%;
+    height: 60px;
+    padding: auto;
+    display: inline;
+}
+
+.footer {
+    margin-top: -12px;
+    display: inline-block;
+}
+
+.footer > * {
+    margin-right: 10px;
+    display: inline-block;
 }
 
 body{
@@ -46,4 +70,4 @@ body{
 @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
-    }
+}

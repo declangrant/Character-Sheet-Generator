@@ -1,5 +1,7 @@
 var tabStorage = Object();
 
+var totalSkills = 0;
+
 async function returnTabs(){
     if(Object.keys(this.tabStorage).length > 0){
         return this.tabStorage;
@@ -19,6 +21,9 @@ async function setupSkills(url){
                 tab = new Tab(skill.stat);
                 temptabStorage[skill.stat] = tab;
             }
+
+            if(skill.enabled) totalSkills += Math.max(skill.count, 1);
+            
             tab.addSkill(skill);
         }
         Object.keys(temptabStorage).forEach(tab => {
@@ -105,6 +110,16 @@ class Skill {
 
     addCount(count){
         this._count += parseInt(count);
+    }
+
+    updateCount(count){
+        var value = parseInt(count)
+
+        if(this._enabled){
+            totalSkills -= this._count;
+            totalSkills += value;
+        }
+        this._count = value;
     }
 
     get count(){

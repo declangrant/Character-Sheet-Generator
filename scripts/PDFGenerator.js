@@ -1,3 +1,4 @@
+window.addEventListener("load", createBasePDF);
 var request = new XMLHttpRequest();
 
 request.open("GET", "./cp2020/text_info.json", false);
@@ -14,20 +15,31 @@ async function loadFont(font, pdfDoc){
     this.fonts[font.file] = fontFinal;
 }
 
+var tempPDF;
+async function createBasePDF(){
+    const frontURL = './cp2020/front.png';
+    const backURL = './cp2020/back.png';
+    tempPDF = await PDFLib.PDFDocument.create();
+    await addPageFromImage(frontURL, tempPDF);
+    await addPageFromImage(backURL, tempPDF);
+}
 
 async function createPdf() {
+    console.log("creating pdf");
     fonts = [];
     var fontkit = window.fontkit;
     var pdflib = window.PDFLib;
 
+    /*
     const url = './cp2020/character_sheet_blank.pdf';
 	const existingPdfBytes = await fetch(url).then((res) =>
 		res.arrayBuffer(),
 	);
     const pdfDoc = await pdflib.PDFDocument.load(existingPdfBytes);
-
+    */
+    pdfDoc = await tempPDF.copy();
+    console.log("copied pdf");
     pdfDoc.registerFontkit(fontkit);
-
     const header_font = loadFont(FONT.ARIALNB, pdfDoc)
     const skill_font = loadFont(FONT.ARIAL, pdfDoc);
 
@@ -37,6 +49,7 @@ async function createPdf() {
     var curRow = 0;
     var curCollumn = 0;
 
+    console.log("adding skill");
     const tabs = await returnTabs();
     Object.keys(tabs).forEach(tabKey => {
         tab = tabs[tabKey];
@@ -60,14 +73,30 @@ async function createPdf() {
             }
         });
     });
-
+    console.log("finished adding skill");
     const pdfBytes = await pdfDoc.save();
-    download(
-        pdfBytes,
-        'character_sheet.pdf',
-        'application/pdf',
-      );
+    console.log("saving");
+    download(pdfBytes, 'character_sheet.pdf', 'application/pdf');
+    console.log("downloading");
 };
+
+async function addPageFromImage(url, pdfDoc){
+    console.log("adding image");
+    const pngResponse = await fetch(url);
+    const pngBuffer = await pngResponse.blob();
+    const png = await pdfDoc.embedPng(new Uint8Array(await pngBuffer.arrayBuffer()));
+
+    const page = pdfDoc.addPage([png.width, png.height]);
+
+    const { width, height} = page.getSize();
+    page.drawImage(png, {
+        x: 0,
+        y: 0,
+        width: width,
+        height: height
+    });
+    console.log("finished adding image");
+}
 
 function drawRow(page, row, collumn, text, is_skill, has_entry) {
     const { width, height} = page.getSize();
@@ -89,7 +118,6 @@ function drawRow(page, row, collumn, text, is_skill, has_entry) {
     fontString += font.size + "px Arial ";
     fontString += !is_skill ? "Narrow" : "";
 
-    console.log(fontString);
     const fillWidth = getTextWidth(fontString, "[       ]");
     const stringWidth = getTextWidth(fontString, text) + fillWidth;
     const charWidth = getTextWidth(fontString, has_entry ? "_" : ".");
@@ -130,38 +158,10 @@ const FONT = {
     ARIAL: text_info.skill_font
 }
 
-/*
-function getTextWidth(fontObject, string) {
-     
-    text = document.createElement("span");
-    document.body.appendChild(text);
-
-    var font = fontObject.file.replace(".ttf", "");
-    console.log(font);
-    text.style.fontFamily = fontObject.file == FONT.ARIAL ? "Arial" : "Arial Narrow";
-    if(fontObject.file == FONT.ARIALNB){
-        text.style.fontWeight = "Bold";
-    }
-    text.style.fontSize = fontObject.size + "px";
-    text.style.height = 'auto';
-    text.style.width = 'auto';
-    text.style.position = 'absolute';
-    text.style.whiteSpace = 'no-wrap';
-    text.innerHTML = string;
- 
-    width = Math.ceil(text.clientWidth);
-    formattedWidth = parseInt(width);
-
-    console.log(string + "|" + text.clientWidth + "|" + width);
-    document.body.removeChild(text);
-    return formattedWidth;
-}
-*/
 function getTextWidth(font, text) {
     const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
     const context = canvas.getContext("2d");
     context.font = font;
-    console.log(context.font);
     const metrics = context.measureText(text);
     return metrics.width;
   }

@@ -1,4 +1,4 @@
-window.onload = setupUI;
+window.addEventListener("load", setupUI);
 
 const tabs = Object();
 
@@ -8,6 +8,7 @@ async function setupUI(){
         tabDiv.className = "tab_div";
         document.body.appendChild(tabDiv);
 
+        var firstTab = true;
         Object.keys(tabs).forEach(async tabString => {
             var tab = tabs[tabString];
 
@@ -16,7 +17,7 @@ async function setupUI(){
                 var stat_name = skillObject.stat.toUpperCase();
                 var stat_tab = document.getElementById(stat_name);
 
-                var table;
+                var grid;
                 if(!stat_tab){
                     stat_tab = document.createElement("div");
                     stat_tab.id = stat_name;
@@ -29,21 +30,25 @@ async function setupUI(){
                     tab_button.innerText = stat_name;
                     tabDiv.appendChild(tab_button);
 
-                    table = document.createElement("table")
-                    table.id = "table_" + stat_name;
+                    if(firstTab){
+                        tab_button.click();
+                        firstTab = false;
+                    }
 
-                    stat_tab.appendChild(table);
+                    grid = document.createElement("div")
+                    grid.id = "grid_" + stat_name;
+                    grid.className = "tabGrid";
+
+                    stat_tab.appendChild(grid);
                 }
 
-                table = document.getElementById("table_" + stat_name);
+                grid = document.getElementById("grid_" + stat_name);
 
                 var skill_name = skillObject.skill_name == "" ? "<blank>" : skillObject.skill_name
-                var table_row = document.createElement("tr");
-                table_row.id = skill_name;
-                table_row.setAttribute("style", "inline-block");
+                var skillDiv = document.createElement("div");
+                skillDiv.id = skill_name;
+                skillDiv.className = "skillDiv";
 
-
-                var td = document.createElement("td");
                 var checkbox = document.createElement("input");
                 checkbox.id = skill_name + "_checkbox"
                 checkbox.type = "checkbox";
@@ -51,45 +56,75 @@ async function setupUI(){
                 checkbox.checked = skillObject.enabled;
                 checkbox.addEventListener('change', (event) => {
                     skillObject.enabled = event.currentTarget.checked;
+
+                    var count = Math.max(skillObject.count, 1);
+
+                    if(event.currentTarget.checked){
+                        totalSkills += count;
+                    } else {
+                        totalSkills -= count;
+                    }
+
                     tabStorage[skillObject.stat] = skillObject;
+
+                    updateTotalCounter();
                 })
 
-                td.append(checkbox);
-                table_row.append(td);
+                skillDiv.append(checkbox);
 
-                createSpinBox(skillObject, table_row);
+                if(skillObject.count > 0){
+                    var spinBox = document.createElement("input");
+                    spinBox.type = "number";
+                    spinBox.min = "0";
+                    spinBox.max = "99";
+                    spinBox.step = "1";
+                    spinBox.value = skillObject.count;
+                    
+                    spinBox.setAttribute("style", "width: 30px");
+                    spinBox.addEventListener("change", (event) => {
+                        skillObject.updateCount(parseInt(event.target.value));
+                        updateTotalCounter();
+                    });
+                    skillDiv.appendChild(spinBox);
+                }
 
-                td = document.createElement("td");
                 var nameLabel = document.createElement("label");
-                nameLabel.innerText = "\u2002" + table_row.id;
+                nameLabel.innerText = "\u2002" + skillDiv.id;
                 nameLabel.htmlFor = checkbox.id;
 
-                td.appendChild(nameLabel);
-                table_row.append(td);
+                skillDiv.append(nameLabel);
 
-                td = document.createElement("td");
                 var sourceLabel = document.createElement("label");
                 sourceLabel.innerText = "\u2003[" + skillObject.source.replace(/(\r\n|\n|\r)/gm, "") + "]";
                 sourceLabel.htmlFor = checkbox.id;
 
-                td.appendChild(sourceLabel);
-                table_row.append(td);
-
-                td = document.createElement("td");
-                td.style = "width: 20px";
-                table_row.append(td);
-                table.appendChild(table_row);
+                skillDiv.append(sourceLabel);
+                grid.appendChild(skillDiv);
 
                 document.body.appendChild(stat_tab);
             });
         });
     });
+    var footer = document.createElement("div");
+    footer.className = "footer";
+    document.body.appendChild(footer);
+
     var pdfButton = document.createElement("button");
     pdfButton.textContent = "Generate PDF";
     pdfButton.addEventListener("click", (event) => {
         createPdf();
     });
-    document.body.appendChild(pdfButton);
+    footer.appendChild(pdfButton);
+
+    var skillCount = document.createElement("h6");
+    skillCount.id = "skillCounter";
+    footer.appendChild(skillCount);
+    updateTotalCounter();
+}
+
+function updateTotalCounter() {
+    var counter = document.getElementById("skillCounter");
+    counter.innerText = "Skills: " + totalSkills + "/102";
 }
 
 function openTab(evt, tabName) {
@@ -109,11 +144,11 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-function createSpinBox(skillObject, table_row){
+function createSpinBox(skillObject, skillDiv){
     if(skillObject.count > 0){
-        td = document.createElement("td");
         var container = document.createElement("div");
         container.className = "container";
+        container.setAttribute("style", "width: 50px");
 
         var incrementButton = document.createElement("div");
         incrementButton.id = "increment_button";
@@ -130,7 +165,7 @@ function createSpinBox(skillObject, table_row){
         var totalCount = document.createElement("div");
         totalCount.id = "total_count";
         totalCount.innerText = skillObject.count;
-        totalCount.setAttribute("style", "text-align: center;");
+        totalCount.setAttribute("style", "height: 30px; width: 50px; text-align: center;");
 
         container.appendChild(totalCount);
 
@@ -144,14 +179,11 @@ function createSpinBox(skillObject, table_row){
         downButton.setAttribute("height", "20px")
         decrementButton.appendChild(downButton);
         container.appendChild(decrementButton);
-        td.append(container);
-        table_row.append(td);
+
+        skillDiv.appendChild(container);
 
         upButton.addEventListener("click", increaseCounter.bind(null, totalCount, skillObject), false);
         downButton.addEventListener("click", decreaseCounter.bind(null, totalCount, skillObject), false);
-    }else{
-        td = document.createElement("td");
-        table_row.append(td);
     }
 }
 
@@ -167,7 +199,7 @@ function decreaseCounter(counterElement, skill) {
 }
 
 function updateCounter(counterElement, skill){
-    var count = skill.count;
-    counterElement.innerText = count;
+    var skillCount = skill.count;
+    counterElement.innerText = skillCount;
     updateSkillCount(skill);
 }
