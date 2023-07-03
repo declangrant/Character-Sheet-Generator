@@ -1,0 +1,98 @@
+.tab_div {
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab_div button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab_div button:hover {
+    background-color: #ddd;
+}
+
+.tab_div button.active {
+    background-color: #ccc;
+}
+
+.stat_content {
+    display: none;
+    padding: 6px 12px;
+    border: 2px solid #ccc;
+    border-top: none;
+    animation: fadeEffect 1s;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.tabGrid {
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
+    grid-template-rows: repeat(auto-fill, 60px);
+    grid-auto-flow: row;
+}
+
+.skillDiv {
+    line-height: 60px;
+    display: inline-block;
+    height: 60px;
+}
+
+.skillDiv > * {
+    vertical-align: middle;
+}
+
+.container {
+    padding: 0%;
+    height: 60px;
+    padding: auto;
+    display: inline;
+}
+
+.footer {
+    height: 20px;
+    padding-top: 10px;
+    margin: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+body{
+    background-color: #f1f1f1;
+}
+
+.generateButton {
+    border-radius: 5px;
+    padding: 0px;
+    height: inherit;
+    border: 2px solid #ccc;
+    font-size: 12px;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#skillCounter {
+    display: inline-block;
+    vertical-align: middle;
+    height: inherit;
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
