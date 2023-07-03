@@ -30,13 +30,6 @@ async function createPdf() {
     var fontkit = window.fontkit;
     var pdflib = window.PDFLib;
 
-    /*
-    const url = './cp2020/character_sheet_blank.pdf';
-	const existingPdfBytes = await fetch(url).then((res) =>
-		res.arrayBuffer(),
-	);
-    const pdfDoc = await pdflib.PDFDocument.load(existingPdfBytes);
-    */
     pdfDoc = await tempPDF.copy();
     console.log("copied pdf");
     pdfDoc.registerFontkit(fontkit);

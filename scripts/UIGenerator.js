@@ -49,8 +49,9 @@ async function setupUI(){
                 skillDiv.id = skill_name;
                 skillDiv.className = "skillDiv";
 
+                var skillId = skill_name + skillObject.source
                 var checkbox = document.createElement("input");
-                checkbox.id = skill_name + "_checkbox"
+                checkbox.id = skillId + "_checkbox"
                 checkbox.type = "checkbox";
                 checkbox.className = "should_enable";
                 checkbox.checked = skillObject.enabled;
@@ -75,7 +76,7 @@ async function setupUI(){
                 if(skillObject.count > 0){
                     var spinBox = document.createElement("input");
                     spinBox.type = "number";
-                    spinBox.min = "0";
+                    spinBox.min = "1";
                     spinBox.max = "99";
                     spinBox.step = "1";
                     spinBox.value = skillObject.count;
@@ -109,22 +110,27 @@ async function setupUI(){
     footer.className = "footer";
     document.body.appendChild(footer);
 
+    var skillCount = document.createElement("p");
+    skillCount.innerText = "Skills: " + totalSkills + "/102";
+    skillCount.id = "skillCounter";
+    footer.appendChild(skillCount);
+    updateTotalCounter();
+
     var pdfButton = document.createElement("button");
+    pdfButton.className = "generateButton";
     pdfButton.textContent = "Generate PDF";
     pdfButton.addEventListener("click", (event) => {
         createPdf();
     });
     footer.appendChild(pdfButton);
-
-    var skillCount = document.createElement("h6");
-    skillCount.id = "skillCounter";
-    footer.appendChild(skillCount);
-    updateTotalCounter();
 }
 
 function updateTotalCounter() {
     var counter = document.getElementById("skillCounter");
-    counter.innerText = "Skills: " + totalSkills + "/102";
+    if(counter){
+        counter.innerText = "Skills: " + totalSkills + "/102";
+        console.log(counter);
+    }
 }
 
 function openTab(evt, tabName) {
@@ -142,64 +148,4 @@ function openTab(evt, tabName) {
 
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
-}
-
-function createSpinBox(skillObject, skillDiv){
-    if(skillObject.count > 0){
-        var container = document.createElement("div");
-        container.className = "container";
-        container.setAttribute("style", "width: 50px");
-
-        var incrementButton = document.createElement("div");
-        incrementButton.id = "increment_button";
-
-        var upButton = document.createElement("input");
-        upButton.type = "image";
-        upButton.id = "up_button";
-        upButton.src = "webassets/images/up_arrow.png";
-        upButton.setAttribute("height", "20px")
-
-        incrementButton.appendChild(upButton);
-        container.appendChild(incrementButton);
-
-        var totalCount = document.createElement("div");
-        totalCount.id = "total_count";
-        totalCount.innerText = skillObject.count;
-        totalCount.setAttribute("style", "height: 30px; width: 50px; text-align: center;");
-
-        container.appendChild(totalCount);
-
-        var decrementButton = document.createElement("div");
-        decrementButton.id = "decrement_button";
-
-        var downButton = document.createElement("input");
-        downButton.type = "image";
-        downButton.id = "down_button";
-        downButton.src = "webassets/images/down_arrow.png";
-        downButton.setAttribute("height", "20px")
-        decrementButton.appendChild(downButton);
-        container.appendChild(decrementButton);
-
-        skillDiv.appendChild(container);
-
-        upButton.addEventListener("click", increaseCounter.bind(null, totalCount, skillObject), false);
-        downButton.addEventListener("click", decreaseCounter.bind(null, totalCount, skillObject), false);
-    }
-}
-
-
-function increaseCounter(counterElement, skill) {
-    skill.addCount(1);
-    updateCounter(counterElement, skill);
-}
-
-function decreaseCounter(counterElement, skill) {
-    skill.removeCount(1);
-    updateCounter(counterElement, skill);
-}
-
-function updateCounter(counterElement, skill){
-    var skillCount = skill.count;
-    counterElement.innerText = skillCount;
-    updateSkillCount(skill);
 }
