@@ -101,7 +101,7 @@ async function createPdf() {
 //Uses image url to create a new page
 async function addPageFromImage(url, pdfDoc, id){
     //Obtains the image and embeds it to the pdf document
-    const pngResponse = fetch(url);
+    const pngResponse = await fetch(url);
     const pngBuffer = await pngResponse.blob();
     
     const png = await pdfDoc.embedPng(new Uint8Array(await pngBuffer.arrayBuffer()));
