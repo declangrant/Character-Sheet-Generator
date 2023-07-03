@@ -24,12 +24,12 @@ var tempPDF;
 async function createBasePDF(){
     const frontURL = './cp2020/front.png';
     const backURL = './cp2020/back.png';
+
     //Creates blank PDF
     tempPDF = await PDFLib.PDFDocument.create();
 
-    //Custom function to add a page from an image
-    await addPageFromImage(frontURL, tempPDF);
-    await addPageFromImage(backURL, tempPDF);
+    //Add two pages "simultaneously"
+    await Promise.all([addPageFromImage(frontURL, tempPDF, 0), addPageFromImage(backURL, tempPDF, 1)]);
 }
 
 //Generates final PDF document
@@ -46,8 +46,7 @@ async function createPdf() {
     
     //Add fonts to the document
     pdfDoc.registerFontkit(fontkit);
-    loadFont(FONT.ARIALNB, pdfDoc)
-    loadFont(FONT.ARIAL, pdfDoc);
+    await Promise.all([loadFont(FONT.ARIALNB, pdfDoc), loadFont(FONT.ARIAL, pdfDoc)]);
 
     //Reference to first page of the document
     const pages = pdfDoc.getPages();
@@ -100,14 +99,16 @@ async function createPdf() {
 };
 
 //Uses image url to create a new page
-async function addPageFromImage(url, pdfDoc){
+async function addPageFromImage(url, pdfDoc, id){
     //Obtains the image and embeds it to the pdf document
-    const pngResponse = await fetch(url);
+    const pngResponse = fetch(url);
     const pngBuffer = await pngResponse.blob();
+    
     const png = await pdfDoc.embedPng(new Uint8Array(await pngBuffer.arrayBuffer()));
     
     //Create a new page the size of the image
-    const page = pdfDoc.addPage([png.width, png.height]);
+    
+    const page = pdfDoc.insertPage(id, [png.width, png.height]);
 
     //Obtains size of the page
     const { width, height} = page.getSize();
