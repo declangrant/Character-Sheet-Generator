@@ -1,6 +1,7 @@
 # Cyberpunk 2020 Character Sheet Generator
 
-This project is a small Python app to generate blank a Cyberpunk 2020 character sheet with a custom selection of skills.
+This project is a small app to generate blank a Cyberpunk 2020 character sheet with a custom selection of skills.
+Both a local (Python 3.6+) and website version are available.
 It was created to allow referees to give their players non-standard skill options tailored to a campaign or setting.
 
 # Installation
@@ -42,17 +43,6 @@ To launch the app from a terminal, navigate to the `Character-Sheet-Generator` d
 `python charactersheetgen`
 
 The interface itself is simple; select the skills you want to include, then click "Generate" and a File Explorer window will open with the created pdf.
-
-# Backlog
-
-Future features that I want to implement, in no particular order.
-
-- Save skill profiles
-- Add new skills through the GUI
-- Check for updates to `skills.csv` on GitHub
-- Add an option to not always overwrite the previous file
-- Test Linux compatibility (it should work)
-- Build as a standalone Windows application
 
 <p align="right">
   <img src="https://i0.wp.com/rtalsoriangames.com/wp-content/uploads/2019/06/justcyberpunklogo.png" width="15%"/>
