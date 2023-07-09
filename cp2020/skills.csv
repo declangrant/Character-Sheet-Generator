@@ -174,7 +174,7 @@ BioTech,TECH,0,False,CP3901,False
 Butchery,TECH,0,False,Hate&Glory,False
 Braindance Editing,TECH,0,False,CP3271,False
 CAD/CAM,TECH,0,False,UC-Mars,False
-Calligraphy,TECH,0,False,CP3311,False
+Calligraphy,TECH,1,True,CP3311,False
 Cooking,TECH,0,False,Hate&Glory,False
 Cryotank Operation,TECH,0,False,CP3002,True
 CyberTech,TECH,0,False,CP3002,True
@@ -182,9 +182,9 @@ Cyberdeck Design,TECH,0,False,CP3002,True
 Demolitions,TECH,0,False,CP3002,True
 Disguise,TECH,0,False,CP3002,True
 Drone Control,TECH,0,False,Livewire,False
+Electronics,TECH,0,False,CP3002,True
 Elect. Security,TECH,0,False,CP3002,True
 Elect. Warfare,TECH,0,False,CP3481,False
-Electronics,TECH,0,False,CP3002,True
 First Aid,TECH,0,False,CP3002,True
 Forgery,TECH,0,False,CP3002,True
 Gyro Tech,TECH,0,False,CP3002,True
