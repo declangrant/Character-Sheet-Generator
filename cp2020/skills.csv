@@ -12,7 +12,6 @@ Con,SPECIAL ABILITIES,0,False,CP3271,False
 Counsel,SPECIAL ABILITIES,0,False,CP3371,False
 Credibility,SPECIAL ABILITIES,0,False,CP3002,True
 Family,SPECIAL ABILITIES,0,False,CP3002,True
-Family,SPECIAL ABILITIES,0,False,CP3211,False
 Gang Rank,SPECIAL ABILITIES,0,False,CP3271,False
 Interface,SPECIAL ABILITIES,0,False,CP3002,True
 Jury Rig,SPECIAL ABILITIES,0,False,CP3002,True
@@ -141,7 +140,6 @@ Martial Art,REF,3,True,CP3002,True
 Melee,REF,0,False,CP3002,True
 Motorcycle,REF,0,False,CP3002,True
 Operate Hvy.Machinery,REF,0,False,CP3002,True
-Pilot (Blimp),REF,0,False,Ilsk,False
 Pilot (Boat),REF,0,False,Hate&Glory,False
 Pilot (Deep Dive Suit),REF,0,False,CP3481,False
 Pilot (Dirigible),REF,0,False,CP3002,True
@@ -175,16 +173,18 @@ Basic Tech,TECH,0,False,CP3002,True
 BioTech,TECH,0,False,CP3901,False
 Butchery,TECH,0,False,Hate&Glory,False
 Braindance Editing,TECH,0,False,CP3271,False
-Calligraphy,TECH,0,False,CP3311,False
+CAD/CAM,TECH,0,False,UC-Mars,False
+Calligraphy,TECH,1,True,CP3311,False
+Cooking,TECH,0,False,Hate&Glory,False
 Cryotank Operation,TECH,0,False,CP3002,True
 CyberTech,TECH,0,False,CP3002,True
 Cyberdeck Design,TECH,0,False,CP3002,True
 Demolitions,TECH,0,False,CP3002,True
 Disguise,TECH,0,False,CP3002,True
 Drone Control,TECH,0,False,Livewire,False
+Electronics,TECH,0,False,CP3002,True
 Elect. Security,TECH,0,False,CP3002,True
 Elect. Warfare,TECH,0,False,CP3481,False
-Electronics,TECH,0,False,CP3002,True
 First Aid,TECH,0,False,CP3002,True
 Forgery,TECH,0,False,CP3002,True
 Gyro Tech,TECH,0,False,CP3002,True
